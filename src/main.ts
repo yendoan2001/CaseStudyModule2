@@ -32,19 +32,19 @@ export function menuEdit(){
     console.log('3: Edit types');
     console.log('0: Exit menuEdit')
 }
-function subMenuEditTypes(){
+ export function subMenuEditTypes(){
     console.log('1: Add 1 type');
     console.log('2: Delete 1 type');
     console.log('3: Edit 1 type');
     console.log('0: Exit subMenuEditType');
 }
-function subMenuEditOneType(){
+export function subMenuEditOneType(){
     console.log('1: Edit typeName');
     console.log('2: Add 1 meaning');
     console.log('3: Delete 1 meaning');
     console.log('0: Exit subMenuEditMeaning');
 }
-function subMenuEditOneMeaning(){
+export function subMenuEditOneMeaning(){
     console.log('1: Edit definition');
     console.log('2: Add 1 example');
     console.log('1: Delete 1 example');

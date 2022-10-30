@@ -19,9 +19,12 @@ export class Word{
             question = readlineSync.question('Input yes if you want to input type of word:  ');
         }while (question =='yes')
     }
+    static deleteOneType(name: string): void {
+        Word.types = Word.types.filter(type => type.typeName !== name)
+    }
     setName():void{
-        let newname = readlineSync.question('Input new name of word:  ');
-        this.nameWord = newname;
+        let newName = readlineSync.question('Input new name of word:  ');
+        this.nameWord = newName;
     }
     setPronunciation():void{
         let newPronunciation = readlineSync.question('Input new pronunciation of word:  ');
