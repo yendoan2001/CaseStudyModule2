@@ -6,6 +6,12 @@ var Example = /** @class */ (function () {
         this.english = english;
         this.vietnamese = vietnamese;
     }
+    Example.prototype.checkEnglishSentence = function (keyword) {
+        return this.english.includes(keyword);
+    };
+    Example.prototype.checkVietnameseSentence = function (keyword) {
+        return this.vietnamese.includes(keyword);
+    };
     return Example;
 }());
 exports.Example = Example;
