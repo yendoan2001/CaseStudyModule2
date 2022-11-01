@@ -34,7 +34,7 @@ export function mainMenu() {
     console.log('5: Show list of words');
     console.log('0: Exit');
 }
-export function editWord() {
+export function MenuEditWord() {
     console.log('1: Edit nameWord');
     console.log('2: Edit pronunciation');
     console.log('3: Edit types');

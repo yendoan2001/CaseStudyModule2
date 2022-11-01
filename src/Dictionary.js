@@ -44,59 +44,55 @@ var Dictionary = /** @class */ (function () {
         });
     };
     Dictionary.editWord = function () {
-        var question;
-        do {
-            var name_3 = readlineSync.question('Input wordName need to be edited:  ');
-            var word = Dictionary.findWord(name_3);
-            if (word !== undefined) {
-                var exit = true;
-                while (exit == true) {
-                    (0, main_1.editWord)();
-                    var number = readlineSync.question('Choose function to edit word:  ');
-                    switch (number) {
-                        case '1':
-                            word.setName();
-                            (0, main_1.save)('../data/wordData.json', Dictionary.words);
-                            break;
-                        case '2':
-                            word.setPronunciation();
-                            (0, main_1.save)('../data/wordData.json', Dictionary.words);
-                            break;
-                        case '3':
-                            var isLoop = true;
-                            while (isLoop == true) {
-                                (0, main_1.editWord)();
-                                var number_1 = readlineSync.question('Choose function to edit types:  ');
-                                switch (number_1) {
-                                    case '1':
-                                        word.addType();
-                                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
-                                        break;
-                                    case '2':
-                                        word.deleteType();
-                                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
-                                        break;
-                                    case '3':
-                                        word.editTypes();
-                                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
-                                        break;
-                                    case '0':
-                                        isLoop = false;
-                                        break;
-                                }
+        var name = readlineSync.question('Input wordName need to be edited:  ');
+        var word1 = Dictionary.findWord(name);
+        if (word1 !== undefined) {
+            var exit = true;
+            while (exit == true) {
+                (0, main_1.MenuEditWord)();
+                var number = readlineSync.question('Choose function to edit word:  ');
+                switch (number) {
+                    case '1':
+                        word1.setName();
+                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
+                        break;
+                    case '2':
+                        word1.setPronunciation();
+                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
+                        break;
+                    case '3':
+                        var isLoop = true;
+                        while (isLoop == true) {
+                            (0, main_1.MenuEditWord)();
+                            var number_1 = readlineSync.question('Choose function to edit types:  ');
+                            switch (number_1) {
+                                case '1':
+                                    word1.addType();
+                                    (0, main_1.save)('../data/wordData.json', Dictionary.words);
+                                    break;
+                                case '2':
+                                    word1.deleteType();
+                                    (0, main_1.save)('../data/wordData.json', Dictionary.words);
+                                    break;
+                                case '3':
+                                    word1.editTypes();
+                                    (0, main_1.save)('../data/wordData.json', Dictionary.words);
+                                    break;
+                                case '0':
+                                    isLoop = false;
+                                    break;
                             }
-                            break;
-                        case '0':
-                            exit = false;
-                            break;
-                    }
+                        }
+                        break;
+                    case '0':
+                        exit = false;
+                        break;
                 }
             }
-            else {
-                console.log('This word is not exist');
-                question = readlineSync.question('Input yes if you want to edit word again:   ');
-            }
-        } while (question == 'yes');
+        }
+        else {
+            console.log('This word is not exist');
+        }
     };
     Dictionary.show = function () {
         var name = readlineSync.question('Input word you want to show:  ');

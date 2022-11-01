@@ -1,6 +1,6 @@
 import {Word} from "./Word";
 import * as readlineSync from "readline-sync";
-import {editWord, save} from "./main";
+import {MenuEditWord, save} from "./main";
 
 export class Dictionary {
     static words: Word[] = [];
@@ -40,40 +40,39 @@ export class Dictionary {
     }
 
     static editWord() {
-        let question;
-        do {
+
             let name = readlineSync.question('Input wordName need to be edited:  ');
-            let word = Dictionary.findWord(name);
-            if (word !== undefined) {
+            const word1 = Dictionary.findWord(name);
+            if (word1 !== undefined) {
                 let exit = true
                 while (exit == true) {
-                    editWord();
+                    MenuEditWord();
                     let number = readlineSync.question('Choose function to edit word:  ');
                     switch (number) {
                         case '1':
-                            word.setName();
+                            word1.setName();
                             save('../data/wordData.json', Dictionary.words);
                             break;
                         case '2':
-                            word.setPronunciation();
+                            word1.setPronunciation();
                             save('../data/wordData.json', Dictionary.words);
                             break;
                         case '3':
                             let isLoop = true;
                             while (isLoop == true) {
-                                editWord();
+                                MenuEditWord();
                                 let number = readlineSync.question('Choose function to edit types:  ')
                                 switch (number) {
                                     case '1':
-                                        word.addType();
+                                        word1.addType();
                                         save('../data/wordData.json', Dictionary.words);
                                         break;
                                     case '2':
-                                        word.deleteType();
+                                        word1.deleteType();
                                         save('../data/wordData.json', Dictionary.words);
                                         break;
                                     case '3':
-                                        word.editTypes();
+                                        word1.editTypes();
                                         save('../data/wordData.json', Dictionary.words);
                                         break;
                                     case '0':
@@ -89,9 +88,8 @@ export class Dictionary {
                 }
             } else {
                 console.log('This word is not exist');
-                question = readlineSync.question('Input yes if you want to edit word again:   ')
             }
-        } while (question == 'yes');
+
     }
 
     static show() {

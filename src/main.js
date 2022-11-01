@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.subMenuEditOneMeaning = exports.subMenuEditOneType = exports.subMenuEditTypes = exports.editWord = exports.mainMenu = exports.accountMenu = exports.save = void 0;
+exports.subMenuEditOneMeaning = exports.subMenuEditOneType = exports.subMenuEditTypes = exports.MenuEditWord = exports.mainMenu = exports.accountMenu = exports.save = void 0;
 var Dictionary_1 = require("./Dictionary");
 var readlineSync = require("readline-sync");
 var AccountManagement_1 = require("./AccountManagement");
@@ -35,13 +35,13 @@ function mainMenu() {
     console.log('0: Exit');
 }
 exports.mainMenu = mainMenu;
-function editWord() {
+function MenuEditWord() {
     console.log('1: Edit nameWord');
     console.log('2: Edit pronunciation');
     console.log('3: Edit types');
     console.log('0: Exit menuEdit');
 }
-exports.editWord = editWord;
+exports.MenuEditWord = MenuEditWord;
 function subMenuEditTypes() {
     console.log('1: Add 1 type');
     console.log('2: Delete 1 type');
