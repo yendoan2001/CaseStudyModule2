@@ -4,6 +4,8 @@ exports.Dictionary = void 0;
 var Word_1 = require("./Word");
 var readlineSync = require("readline-sync");
 var main_1 = require("./main");
+var typedjson_1 = require("typedjson");
+var fs = require("fs");
 var Dictionary = /** @class */ (function () {
     function Dictionary() {
     }
@@ -53,11 +55,13 @@ var Dictionary = /** @class */ (function () {
                 var number = readlineSync.question('Choose function to edit word:  ');
                 switch (number) {
                     case '1':
-                        word1.setName();
+                        var newName = readlineSync.question('Input new name of word:  ');
+                        word1.nameWord = newName;
                         (0, main_1.save)('../data/wordData.json', Dictionary.words);
                         break;
                     case '2':
-                        word1.setPronunciation();
+                        var newPronunciation = readlineSync.question('Input new pronunciation of word:  ');
+                        word1.pronunciation = newPronunciation;
                         (0, main_1.save)('../data/wordData.json', Dictionary.words);
                         break;
                     case '3':
@@ -122,7 +126,9 @@ var Dictionary = /** @class */ (function () {
             console.log("".concat(word.nameWord, "\t").concat(word.pronunciation));
         });
     };
-    Dictionary.words = [];
+    Dictionary.words = typedjson_1.TypedJSON.parseAsArray(fs.readFileSync('../data/wordData.json', {
+        encoding: "utf8"
+    }), Word_1.Word);
     return Dictionary;
 }());
 exports.Dictionary = Dictionary;

@@ -1,9 +1,19 @@
 import {Meaning} from "./Meaning";
 import * as readlineSync from "readline-sync";
 import {subMenuEditOneMeaning} from "./main";
+import {jsonArrayMember, jsonMember, jsonObject} from "typedjson";
 
+
+@jsonObject
+//@ts-ignore
 export class Type {
+
+    @jsonMember(String)
+    //@ts-ignore
     nameType: string;
+
+    @jsonArrayMember(Meaning)
+    //@ts-ignore
     meanings: Meaning[] = [];
 
     constructor(typeName: string) {

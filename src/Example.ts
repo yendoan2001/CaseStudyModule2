@@ -1,5 +1,15 @@
+import {jsonMember, jsonObject} from "typedjson";
+
+@jsonObject
+//@ts-ignore
 export class Example {
+
+    @jsonMember(String)
+    //@ts-ignore
     english: string;
+
+    @jsonMember(String)
+    //@ts-ignore
     vietnamese: string;
 
     constructor(english: string, vietnamese: string) {

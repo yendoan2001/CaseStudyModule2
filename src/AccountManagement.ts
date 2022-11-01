@@ -2,9 +2,13 @@ import {Account} from "./account";
 import * as readlineSync from "readline-sync";
 import {mainMenu, save} from "./main";
 import {Dictionary} from "./Dictionary";
+import {TypedJSON} from "typedjson";
+import * as fs from "fs";
 
 export class AccountManagement {
-    static accounts: Account[] = [];
+    static accounts: Account[] = TypedJSON.parseAsArray(fs.readFileSync('../data/data.json', {
+        encoding: "utf8"
+    }), Account);
 
     constructor() {
     }

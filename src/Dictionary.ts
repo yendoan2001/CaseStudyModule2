@@ -1,9 +1,13 @@
 import {Word} from "./Word";
 import * as readlineSync from "readline-sync";
 import {MenuEditWord, save} from "./main";
+import {TypedJSON} from "typedjson";
+import * as fs from "fs";
 
 export class Dictionary {
-    static words: Word[] = [];
+    static words: Word[] = TypedJSON.parseAsArray(fs.readFileSync('../data/wordData.json', {
+        encoding: "utf8"
+    }), Word);
 
     static addWord() {
         let question;
@@ -40,7 +44,6 @@ export class Dictionary {
     }
 
     static editWord() {
-
             let name = readlineSync.question('Input wordName need to be edited:  ');
             const word1 = Dictionary.findWord(name);
             if (word1 !== undefined) {
@@ -50,11 +53,13 @@ export class Dictionary {
                     let number = readlineSync.question('Choose function to edit word:  ');
                     switch (number) {
                         case '1':
-                            word1.setName();
+                            let newName = readlineSync.question('Input new name of word:  ');
+                            word1.nameWord = newName;
                             save('../data/wordData.json', Dictionary.words);
                             break;
                         case '2':
-                            word1.setPronunciation();
+                            let newPronunciation = readlineSync.question('Input new pronunciation of word:  ');
+                            word1.pronunciation = newPronunciation;
                             save('../data/wordData.json', Dictionary.words);
                             break;
                         case '3':

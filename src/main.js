@@ -1,20 +1,9 @@
 "use strict";
 exports.__esModule = true;
 exports.subMenuEditOneMeaning = exports.subMenuEditOneType = exports.subMenuEditTypes = exports.MenuEditWord = exports.mainMenu = exports.accountMenu = exports.save = void 0;
-var Dictionary_1 = require("./Dictionary");
 var readlineSync = require("readline-sync");
 var AccountManagement_1 = require("./AccountManagement");
 var fs = require("fs");
-var account = require('fs');
-var dataAccount = account.readFileSync('../data/data.json', {
-    encoding: "utf8"
-});
-AccountManagement_1.AccountManagement.accounts = JSON.parse(dataAccount);
-var word = require('fs');
-var data = word.readFileSync('../data/wordData.json', {
-    encoding: "utf8"
-});
-Dictionary_1.Dictionary.words = JSON.parse(data);
 function save(path, object1) {
     var Data = JSON.stringify(object1, null, '\t');
     fs.writeFileSync(path, Data);

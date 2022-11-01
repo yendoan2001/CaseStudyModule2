@@ -5,6 +5,8 @@ var account_1 = require("./account");
 var readlineSync = require("readline-sync");
 var main_1 = require("./main");
 var Dictionary_1 = require("./Dictionary");
+var typedjson_1 = require("typedjson");
+var fs = require("fs");
 var AccountManagement = /** @class */ (function () {
     function AccountManagement() {
     }
@@ -68,7 +70,9 @@ var AccountManagement = /** @class */ (function () {
             return item.emailAccount == email;
         });
     };
-    AccountManagement.accounts = [];
+    AccountManagement.accounts = typedjson_1.TypedJSON.parseAsArray(fs.readFileSync('../data/data.json', {
+        encoding: "utf8"
+    }), account_1.Account);
     return AccountManagement;
 }());
 exports.AccountManagement = AccountManagement;

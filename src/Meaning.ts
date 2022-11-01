@@ -1,7 +1,17 @@
 import {Example} from "./Example";
 import * as readlineSync from "readline-sync";
+import {jsonArrayMember, jsonMember, jsonObject} from "typedjson";
+
+@jsonObject
+//@ts-ignore
 export class Meaning{
+
+    @jsonMember(String)
+    //@ts-ignore
     definition: string;
+
+    @jsonArrayMember(Example)
+    //@ts-ignore
     examples: Example[] = [];
 
     constructor(definition: string) {

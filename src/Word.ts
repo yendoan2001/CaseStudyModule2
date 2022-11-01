@@ -1,10 +1,22 @@
 import {Type} from "./Type";
 import * as readlineSync from "readline-sync";
 import {save, subMenuEditOneMeaning, subMenuEditOneType, subMenuEditTypes} from "./main";
+import {jsonArrayMember, jsonMember, jsonObject} from "typedjson";
 
+@jsonObject
+//@ts-ignore
 export class Word {
+
+    @jsonMember(String)
+    //@ts-ignore
     nameWord: string;
+
+    @jsonMember(String)
+    //@ts-ignore
     pronunciation: string;
+
+    @jsonArrayMember(Type)
+    //@ts-ignore
     types: Type[] = [];
 
     constructor(nameWord: string, pronunciation: string) {

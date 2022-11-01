@@ -2,18 +2,7 @@ import {Dictionary} from "./Dictionary";
 import * as readlineSync from "readline-sync"
 import {AccountManagement} from "./AccountManagement";
 import * as fs from "fs";
-
-const account = require('fs');
-const dataAccount = account.readFileSync('../data/data.json', {
-    encoding: "utf8"
-})
-AccountManagement.accounts = JSON.parse(dataAccount);
-
-const word = require('fs');
-const data = word.readFileSync('../data/wordData.json', {
-    encoding: "utf8"
-})
-Dictionary.words = JSON.parse(data);
+import {Word} from "./Word";
 
 export function save(path: string, object1: object[]) {
     let Data = JSON.stringify(object1, null, '\t');
