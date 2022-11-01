@@ -1,13 +1,25 @@
 "use strict";
 exports.__esModule = true;
-exports.subMenuEditOneMeaning = exports.subMenuEditOneType = exports.subMenuEditTypes = exports.editWord = exports.mainMenu = exports.accountMenu = void 0;
+exports.subMenuEditOneMeaning = exports.subMenuEditOneType = exports.subMenuEditTypes = exports.editWord = exports.mainMenu = exports.accountMenu = exports.save = void 0;
+var Dictionary_1 = require("./Dictionary");
 var readlineSync = require("readline-sync");
 var AccountManagement_1 = require("./AccountManagement");
-var word = require('fs');
-var data = word.readFileSync('../data/data.json', {
+var fs = require("fs");
+var account = require('fs');
+var dataAccount = account.readFileSync('../data/data.json', {
     encoding: "utf8"
 });
-AccountManagement_1.AccountManagement.accounts = JSON.parse(data);
+AccountManagement_1.AccountManagement.accounts = JSON.parse(dataAccount);
+var word = require('fs');
+var data = word.readFileSync('../data/wordData.json', {
+    encoding: "utf8"
+});
+Dictionary_1.Dictionary.words = JSON.parse(data);
+function save(path, object1) {
+    var Data = JSON.stringify(object1, null, '\t');
+    fs.writeFileSync(path, Data);
+}
+exports.save = save;
 function accountMenu() {
     console.log('1: Register');
     console.log('2: Login');
@@ -23,22 +35,6 @@ function mainMenu() {
     console.log('0: Exit');
 }
 exports.mainMenu = mainMenu;
-var isLoop = true;
-while (isLoop) {
-    accountMenu();
-    var number = readlineSync.question('Choose function:  ');
-    switch (number) {
-        case '1':
-            AccountManagement_1.AccountManagement.Register();
-            break;
-        case '2':
-            AccountManagement_1.AccountManagement.LogIn();
-            break;
-        case '0':
-            isLoop = false;
-            break;
-    }
-}
 function editWord() {
     console.log('1: Edit nameWord');
     console.log('2: Edit pronunciation');
@@ -68,3 +64,19 @@ function subMenuEditOneMeaning() {
     console.log('0: Exit subMenuEditOneMeaning');
 }
 exports.subMenuEditOneMeaning = subMenuEditOneMeaning;
+var isLoop = true;
+while (isLoop) {
+    accountMenu();
+    var number = readlineSync.question('Choose function:  ');
+    switch (number) {
+        case '1':
+            AccountManagement_1.AccountManagement.Register();
+            break;
+        case '2':
+            AccountManagement_1.AccountManagement.LogIn();
+            break;
+        case '0':
+            isLoop = false;
+            break;
+    }
+}

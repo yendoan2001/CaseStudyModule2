@@ -15,6 +15,7 @@ var Dictionary = /** @class */ (function () {
             var newWord = new Word_1.Word(name_1, pronunciation);
             newWord.addType();
             Dictionary.words.push(newWord);
+            (0, main_1.save)('../data/wordData.json', Dictionary.words);
             question = readlineSync.question('Input yes if you want to continue adding word:  ');
         } while (question == 'yes');
     };
@@ -25,6 +26,7 @@ var Dictionary = /** @class */ (function () {
             var word = this_1.findWord(name_2);
             if (word !== undefined) {
                 Dictionary.words = Dictionary.words.filter(function (item) { return item.nameWord !== name_2; });
+                (0, main_1.save)('../data/wordData.json', Dictionary.words);
             }
             else {
                 console.log('This word is not exist');
@@ -45,7 +47,7 @@ var Dictionary = /** @class */ (function () {
         var question;
         do {
             var name_3 = readlineSync.question('Input wordName need to be edited:  ');
-            var word = this.findWord(name_3);
+            var word = Dictionary.findWord(name_3);
             if (word !== undefined) {
                 var exit = true;
                 while (exit == true) {
@@ -54,9 +56,11 @@ var Dictionary = /** @class */ (function () {
                     switch (number) {
                         case '1':
                             word.setName();
+                            (0, main_1.save)('../data/wordData.json', Dictionary.words);
                             break;
                         case '2':
                             word.setPronunciation();
+                            (0, main_1.save)('../data/wordData.json', Dictionary.words);
                             break;
                         case '3':
                             var isLoop = true;
@@ -66,12 +70,15 @@ var Dictionary = /** @class */ (function () {
                                 switch (number_1) {
                                     case '1':
                                         word.addType();
+                                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
                                         break;
                                     case '2':
                                         word.deleteType();
+                                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
                                         break;
                                     case '3':
-                                        word.editOneType();
+                                        word.editTypes();
+                                        (0, main_1.save)('../data/wordData.json', Dictionary.words);
                                         break;
                                     case '0':
                                         isLoop = false;
@@ -94,21 +101,25 @@ var Dictionary = /** @class */ (function () {
     Dictionary.show = function () {
         var name = readlineSync.question('Input word you want to show:  ');
         var word = Dictionary.findWord(name);
-        console.log(word.nameWord);
-        console.log(word.pronunciation);
-        console.log("---------------");
-        word.types.forEach(function (type) {
-            console.log("\t".concat(type.nameType));
-            console.log("\t---------------");
-            type.meanings.forEach(function (meaning) {
-                console.log("\t\t".concat(meaning.definition));
-                console.log("\t\t---------------");
-                meaning.examples.forEach(function (example) {
-                    console.log("\t\t\t".concat(example.english));
-                    console.log("\t\t\t".concat(example.vietnamese));
+        if (word !== undefined) {
+            console.log(word.nameWord);
+            console.log(word.pronunciation);
+            console.log("---------------");
+            word.types.forEach(function (type) {
+                console.log("\t".concat(type.nameType));
+                console.log("\t---------------");
+                type.meanings.forEach(function (meaning) {
+                    console.log("\t\t".concat(meaning.definition));
+                    console.log("\t\t---------------");
+                    meaning.examples.forEach(function (example) {
+                        console.log("\t\t\t".concat(example.english));
+                        console.log("\t\t\t".concat(example.vietnamese));
+                    });
                 });
             });
-        });
+        }
+        else
+            throw new Error('This word is not exist');
     };
     Dictionary.listWords = function () {
         Dictionary.words.forEach(function (word) {

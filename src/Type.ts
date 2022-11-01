@@ -1,18 +1,20 @@
 import {Meaning} from "./Meaning";
 import * as readlineSync from "readline-sync";
-import {Example} from "./Example";
-import {subMenuEditOneMeaning, subMenuEditOneType} from "./main";
-export class Type{
+import {subMenuEditOneMeaning} from "./main";
+
+export class Type {
     nameType: string;
-    meanings: Meaning[]=[];
+    meanings: Meaning[] = [];
 
     constructor(typeName: string) {
         this.nameType = typeName;
     }
-    setNameType():void{
+
+    setNameType(): void {
         let newNameType = readlineSync.question('Input new name of type:  ');
         this.nameType = newNameType;
     }
+
     addMeaning() {
         let question;
         do {
@@ -21,22 +23,24 @@ export class Type{
             meaning.addExample();
             this.meanings.push(meaning);
             question = readlineSync.question('Input yes if you want to input meaning of type:  ');
-        } while (question =="yes");
+        } while (question == "yes");
     }
-    deleteMeaning(){
+
+    deleteMeaning() {
         let question;
         do {
             let definition = readlineSync.question('Input meaning you want to delete:  ');
             let meaning = this.findMeaning(definition);
-            if(meaning!==undefined){
-                this.meanings = this.meanings.filter(type => type.definition !== definition );
+            if (meaning !== undefined) {
+                this.meanings = this.meanings.filter(type => type.definition !== definition);
             } else {
                 console.log('This definition is not exist')
                 question = readlineSync.question('Input yes if you want to continue deleting meaning of word:  ');
             }
-        } while (question=="yes");
+        } while (question == "yes");
     }
-    editOneMeaning():void{
+
+    editOneMeaning(): void {
         let question;
         do {
             let name = readlineSync.question('Input definition you want to edit:  ');
@@ -67,8 +71,9 @@ export class Type{
             }
         } while (question == 'yes');
     }
-    findMeaning(name:string): Meaning | undefined {
-        return this.meanings.find(item=>{
+
+    findMeaning(name: string): Meaning | undefined {
+        return this.meanings.find(item => {
             return item.definition == name;
         })
     }

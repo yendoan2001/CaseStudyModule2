@@ -10,6 +10,14 @@ var Word = /** @class */ (function () {
         this.nameWord = nameWord;
         this.pronunciation = pronunciation;
     }
+    Word.prototype.setName = function () {
+        var newName = readlineSync.question('Input new name of word:  ');
+        this.nameWord = newName;
+    };
+    Word.prototype.setPronunciation = function () {
+        var newPronunciation = readlineSync.question('Input new pronunciation of word:  ');
+        this.pronunciation = newPronunciation;
+    };
     Word.prototype.addType = function () {
         var question;
         do {
@@ -43,48 +51,44 @@ var Word = /** @class */ (function () {
             return item.nameType == name;
         });
     };
-    Word.prototype.editOneType = function () {
-        var question;
-        do {
-            var name_1 = readlineSync.question('Input name of type you want to edit:  ');
-            var type = this.findType(name_1);
-            if (type !== undefined) {
-                var exit = true;
-                while (exit == true) {
-                    (0, main_1.subMenuEditOneType)();
-                    var number = readlineSync.question('Choose function to edit one type');
-                    switch (number) {
-                        case '1':
-                            type.setNameType();
-                            break;
-                        case '2':
-                            type.addMeaning();
-                            break;
-                        case '3':
-                            type.deleteMeaning();
-                            break;
-                        case '4':
-                            type.editOneMeaning();
-                            break;
-                        case '0':
-                            exit = false;
-                            break;
+    Word.prototype.editTypes = function () {
+        while (true) {
+            (0, main_1.subMenuEditTypes)();
+            var number = readlineSync.question('Chon chuc nang:  ');
+            switch (number) {
+                case "1":
+                    this.addType();
+                    break;
+                case "2":
+                    this.deleteType();
+                    break;
+                case "3":
+                    var nameType = readlineSync.question('Nhap type:  ');
+                    var type = this.findType(nameType);
+                    var out = true;
+                    while (out == true) {
+                        (0, main_1.subMenuEditOneType)();
+                        var number_1 = readlineSync.question('Chon chuc nang:  ');
+                        switch (number_1) {
+                            case "1":
+                                type.addMeaning();
+                                break;
+                            case "2":
+                                type.deleteMeaning();
+                                break;
+                            case "3":
+                                type.editOneMeaning();
+                                break;
+                            case "0":
+                                out = false;
+                                break;
+                        }
                     }
-                }
+                    break;
+                case "0":
+                    return;
             }
-            else {
-                console.log('This type is not exist');
-                question = readlineSync.question('Input yes if you want to continue editing type');
-            }
-        } while (question == 'yes');
-    };
-    Word.prototype.setName = function () {
-        var newName = readlineSync.question('Input new name of word:  ');
-        this.nameWord = newName;
-    };
-    Word.prototype.setPronunciation = function () {
-        var newPronunciation = readlineSync.question('Input new pronunciation of word:  ');
-        this.pronunciation = newPronunciation;
+        }
     };
     return Word;
 }());

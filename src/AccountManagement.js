@@ -18,6 +18,7 @@ var AccountManagement = /** @class */ (function () {
         else {
             var userAccount = new account_1.Account(email, password);
             this.accounts.push(userAccount);
+            (0, main_1.save)('../data/data.json', AccountManagement.accounts);
         }
     };
     AccountManagement.LogIn = function () {
@@ -42,7 +43,12 @@ var AccountManagement = /** @class */ (function () {
                         Dictionary_1.Dictionary.editWord();
                         break;
                     case '4':
-                        Dictionary_1.Dictionary.show();
+                        try {
+                            Dictionary_1.Dictionary.show();
+                        }
+                        catch (e) {
+                            console.log(e.message);
+                        }
                         break;
                     case '5':
                         Dictionary_1.Dictionary.listWords();
